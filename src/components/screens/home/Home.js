@@ -9,7 +9,8 @@ import {
   ImageBackground,
   SafeAreaView,
   Dimensions,
-  FlatList
+  FlatList,
+  ActivityIndicator
 } from "react-native";
 import HomeMovie from "./components/HomeMovie";
 import getPosterUrl from "./common/getMoviePoster";
@@ -37,18 +38,22 @@ const Home = ({ navigation }) => {
       alert(error);
     }
   }
-<<<<<<< HEAD
   const styles = StyleSheet.create({
     moviesList: {
       flex: 1,
       flexDirection: "row",
-      flexWrap: "wrap"
+      justifyContent: "center",
+      flexWrap: "wrap",
+      marginTop: 20
     },
     imgWrap: {
       margin: 2,
       padding: 2,
       height: Dimensions.get("window").height / 2,
       width: Dimensions.get("window").width / 2 - 4
+    },
+    spinner: {
+      marginTop: 20
     }
   });
   console.log("movies ----", allMovies);
@@ -60,29 +65,31 @@ const Home = ({ navigation }) => {
           data={allMovies}
           renderItem={({ item }) => (
             <View style={styles.imgWrap}>
-              <HomeMovie navigation={navigation} movie={item} />
+               <HomeMovie navigation={navigation} movie={item} /> 
+              <Text>{item.id}</Text>
             </View>
           )}
         />
-      ) : null} */}
+      ) : (
+        <ActivityIndicator size="large" color="#0000ff" />
+      )}
+     */}
 
       <ScrollView>
         <View style={styles.moviesList}>
-          {allMovies.length
-            ? allMovies.map(item => (
-                <View style={styles.imgWrap}>
-                  <HomeMovie navigation={navigation} movie={item} />
-                </View>
-              ))
-            : null}
+          {allMovies.length ? (
+            allMovies.map(item => (
+              <View style={styles.imgWrap} key={item.id}>
+                <HomeMovie navigation={navigation} movie={item} />
+              </View>
+            ))
+          ) : (
+            <ActivityIndicator size="large" color="#0000ff" />
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
   );
-=======
-
-  return <SafeAreaView />;
->>>>>>> 416a8971ae2048c792a19c2ba29cac3fb6a8a70e
 };
 
 export default Home;
