@@ -33,6 +33,7 @@ const Home = ({ navigation }) => {
       console.log(movies);
       const mainBg = getPosterUrl(movies.data.results[0].poster_path);
       setMainBackgroundUrl(mainBg);
+      console.log(mainBg);
       setAllMovies(movies.data.results);
     } catch (error) {
       alert(error);
