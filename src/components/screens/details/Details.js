@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  ActivityIndicator
+} from "react-native";
 import axios from "axios";
 
 const Details = ({ navigation }) => {
@@ -23,6 +29,7 @@ const Details = ({ navigation }) => {
   return (
     <View>
       <Text>Details Page</Text>
+      {/* <ActivityIndicator size="large" color="#0000ff" /> */}
     </View>
   );
 };

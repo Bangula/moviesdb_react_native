@@ -46,7 +46,9 @@ const Home = ({ navigation }) => {
     moviesList: {
       flex: 1,
       flexDirection: "row",
-      flexWrap: "wrap"
+      justifyContent: "center",
+      flexWrap: "wrap",
+      marginTop: 20
     },
     imgWrap: {
       margin: 2,
@@ -91,11 +93,15 @@ const Home = ({ navigation }) => {
           data={allMovies}
           renderItem={({ item }) => (
             <View style={styles.imgWrap}>
-              <HomeMovie navigation={navigation} movie={item} />
+               <HomeMovie navigation={navigation} movie={item} /> 
+              <Text>{item.id}</Text>
             </View>
           )}
         />
-      ) : null} */}
+      ) : (
+        <ActivityIndicator size="large" color="#0000ff" />
+      )}
+     */}
 
       <ScrollView>
         <View style={styles.mainPosterContainer}>
@@ -142,13 +148,15 @@ const Home = ({ navigation }) => {
           </ImageBackground>
         </View>
         <View style={styles.moviesList}>
-          {allMovies.length
-            ? allMovies.map(item => (
-                <View style={styles.imgWrap}>
-                  <HomeMovie navigation={navigation} movie={item} />
-                </View>
-              ))
-            : null}
+          {allMovies.length ? (
+            allMovies.map(item => (
+              <View style={styles.imgWrap} key={item.id}>
+                <HomeMovie navigation={navigation} movie={item} />
+              </View>
+            ))
+          ) : (
+            <ActivityIndicator size="large" color="#0000ff" />
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

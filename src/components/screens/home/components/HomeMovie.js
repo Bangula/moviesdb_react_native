@@ -6,9 +6,11 @@ import {
   Button,
   StyleSheet,
   ImageBackground,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from "react-native";
 import getPoster from "../common/getMoviePoster";
+import AsyncStorage from "@react-native-community/async-storage";
 import lion from "../../../../assets/images/lion.jpg";
 
 const styles = StyleSheet.create({
@@ -18,9 +20,11 @@ const styles = StyleSheet.create({
     alignSelf: "stretch"
   }
 });
+
 const HomeMovie = props => {
   const [img, setImg] = React.useState("");
-  React.useEffect(async () => {
+
+  const getMePoster = async () => {
     try {
       let image = await getPoster(props.movie.poster_path);
       if (image) {
@@ -29,17 +33,41 @@ const HomeMovie = props => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  React.useEffect(() => {
+    getMePoster();
   }, []);
+
+  const storeData = async id => {
+    try {
+      await AsyncStorage.setItem(`@${id}`, JSON.stringify(props.movie));
+    } catch (e) {
+      // saving error
+    }
+  };
+
   console.log("home movie props", props);
   return (
     <View style={{ flex: 1 }}>
-      <TouchableOpacity
-        style={{ flex: 1 }}
-        onPress={() => props.navigation.navigate("Details")}
-      >
-        <Image style={styles.img} source={{ uri: img }} />
-      </TouchableOpacity>
-      <Button title="Add to Fav" onPress={() => alert("Added to fav")} />
+      {img ? (
+        <>
+          <TouchableOpacity
+            style={{ flex: 1 }}
+            onPress={() =>
+              props.navigation.navigate("Details", { id: props.movie.id })
+            }
+          >
+            <Image style={styles.img} source={{ uri: img }} />
+          </TouchableOpacity>
+          <Button
+            title="Add to Favourites"
+            onPress={() => storeData(props.movie.id)}
+          />
+        </>
+      ) : (
+        <ActivityIndicator size="large" color="#0000ff" />
+      )}
     </View>
   );
 };
