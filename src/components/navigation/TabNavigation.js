@@ -57,9 +57,29 @@ const MainStack = createStackNavigator(
     }
   }
 );
-const FavoriteStack = createStackNavigator({
-  Favorite
-});
+const FavoriteStack = createStackNavigator(
+  {
+    Favorite
+  },
+  {
+    defaultNavigationOptions: {
+      headerTitle: (
+        <View style={styles.headerContainer}>
+          <View style={{ marginLeft: 10 }}>
+            <Image source={logo1} style={{ width: 80 }} resizeMode="contain" />
+          </View>
+          <View style={[styles.logoContainer]}>
+            <Image source={logo2} style={{ width: 80 }} resizeMode="contain" />
+          </View>
+        </View>
+      ),
+      headerStyle: {
+        backgroundColor: "#1d1d1d"
+      },
+      headerTintColor: "#fff"
+    }
+  }
+);
 const TabNavigation = createBottomTabNavigator({
   Home: MainStack,
   Favorite: FavoriteStack

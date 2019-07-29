@@ -37,6 +37,7 @@ const Home = ({ navigation }) => {
       alert(error);
     }
   }
+<<<<<<< HEAD
   const styles = StyleSheet.create({
     moviesList: {
       flex: 1,
@@ -78,6 +79,10 @@ const Home = ({ navigation }) => {
       </ScrollView>
     </SafeAreaView>
   );
+=======
+
+  return <SafeAreaView />;
+>>>>>>> 416a8971ae2048c792a19c2ba29cac3fb6a8a70e
 };
 
 export default Home;
