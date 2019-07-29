@@ -21,8 +21,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     flexDirection: "row",
     alignItems: "center"
-  },
-  imgContainer:
+  }
 });
 
 const MainStack = createStackNavigator(
