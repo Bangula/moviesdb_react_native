@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  ImageBackground,
+  TouchableOpacity
+} from "react-native";
 
 const HomeMovie = ({ navigation }) => {
   return (
