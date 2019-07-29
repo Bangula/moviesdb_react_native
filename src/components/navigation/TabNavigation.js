@@ -21,6 +21,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     flexDirection: "row",
     alignItems: "center"
+  },
+  logoContainer: {
+    alignSelf: "center",
+    justifyContent: "center",
+    marginRight: 10
   }
 });
 
@@ -37,22 +42,10 @@ const MainStack = createStackNavigator(
     defaultNavigationOptions: {
       headerTitle: (
         <View style={styles.headerContainer}>
-          <View
-            style={{
-              alignSelf: "center",
-              justifyContent: "center",
-              marginRight: 20
-            }}
-          >
+          <View style={{ marginLeft: 10 }}>
             <Image source={logo1} style={{ width: 80 }} resizeMode="contain" />
           </View>
-          <View
-            style={{
-              alignSelf: "center",
-              justifyContent: "center",
-              marginRight: 20
-            }}
-          >
+          <View style={[styles.logoContainer]}>
             <Image source={logo2} style={{ width: 80 }} resizeMode="contain" />
           </View>
         </View>
