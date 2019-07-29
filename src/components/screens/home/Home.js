@@ -7,8 +7,11 @@ import {
   Button,
   StyleSheet,
   ImageBackground,
-  SafeAreaView
+  SafeAreaView,
+  Dimensions,
+  FlatList
 } from "react-native";
+import HomeMovie from "./components/HomeMovie";
 import getPosterUrl from "./common/getMoviePoster";
 
 const apiKey = "fc22f3679adfcc3e819328e339157dfa";
@@ -34,10 +37,45 @@ const Home = ({ navigation }) => {
       alert(error);
     }
   }
-
+  const styles = StyleSheet.create({
+    moviesList: {
+      flex: 1,
+      flexDirection: "row",
+      flexWrap: "wrap"
+    },
+    imgWrap: {
+      margin: 2,
+      padding: 2,
+      height: Dimensions.get("window").height / 2,
+      width: Dimensions.get("window").width / 2 - 4
+    }
+  });
+  console.log("movies ----", allMovies);
   return (
     <SafeAreaView>
-      <ScrollView />
+      {/* {allMovies.length ? (
+        <FlatList
+          style={styles.moviesList}
+          data={allMovies}
+          renderItem={({ item }) => (
+            <View style={styles.imgWrap}>
+              <HomeMovie navigation={navigation} movie={item} />
+            </View>
+          )}
+        />
+      ) : null} */}
+
+      <ScrollView>
+        <View style={styles.moviesList}>
+          {allMovies.length
+            ? allMovies.map(item => (
+                <View style={styles.imgWrap}>
+                  <HomeMovie navigation={navigation} movie={item} />
+                </View>
+              ))
+            : null}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
