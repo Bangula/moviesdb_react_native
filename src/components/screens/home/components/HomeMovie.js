@@ -8,8 +8,8 @@ import {
   ImageBackground,
   TouchableOpacity
 } from "react-native";
-
-import img from "../../../../assets/images/lion.jpg";
+import getPoster from "../common/getMoviePoster";
+import lion from "../../../../assets/images/lion.jpg";
 
 const styles = StyleSheet.create({
   img: {
@@ -19,6 +19,17 @@ const styles = StyleSheet.create({
   }
 });
 const HomeMovie = props => {
+  const [img, setImg] = React.useState("");
+  React.useEffect(async () => {
+    try {
+      let image = await getPoster(props.movie.poster_path);
+      if (image) {
+        setImg(image);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
   console.log("home movie props", props);
   return (
     <View style={{ flex: 1 }}>
@@ -26,11 +37,7 @@ const HomeMovie = props => {
         style={{ flex: 1 }}
         onPress={() => props.navigation.navigate("Details")}
       >
-        <Image
-          style={styles.img}
-          // style={styles.button}
-          source={img}
-        />
+        <Image style={styles.img} source={{ uri: img }} />
       </TouchableOpacity>
       <Button title="Add to Fav" onPress={() => alert("Added to fav")} />
     </View>
