@@ -35,11 +35,7 @@ const Home = ({ navigation }) => {
     }
   }
 
-  return (
-    <SafeAreaView>
-      <ScrollView />
-    </SafeAreaView>
-  );
+  return <SafeAreaView />;
 };
 
 export default Home;
