@@ -11,33 +11,30 @@ import {
 
 import img from "../../../../assets/images/lion.jpg";
 
-const HomeMovie = () => {
+const styles = StyleSheet.create({
+  img: {
+    flex: 1,
+    width: null,
+    alignSelf: "stretch"
+  }
+});
+const HomeMovie = props => {
+  console.log("home movie props", props);
   return (
-    <TouchableOpacity
-      style={{ flex: 1 }}
-      //onPress={this._onPressButton}
-    >
-      <Image
-        style={{ width: "100%", height: "100%" }}
-        // style={styles.button}
-        source={img}
-      />
-    </TouchableOpacity>
+    <View style={{ flex: 1 }}>
+      <TouchableOpacity
+        style={{ flex: 1 }}
+        onPress={() => props.navigation.navigate("Details")}
+      >
+        <Image
+          style={styles.img}
+          // style={styles.button}
+          source={img}
+        />
+      </TouchableOpacity>
+      <Button title="Add to Fav" onPress={() => alert("Added to fav")} />
+    </View>
   );
 };
 
 export default HomeMovie;
-// const styles = StyleSheet.create({
-//   container: {
-//     borderRadius: 4,
-//     borderWidth: 0.5,
-//     borderColor: '#d6d7da',
-//   },
-//   title: {
-//     fontSize: 19,
-//     fontWeight: 'bold',
-//   },
-//   activeTitle: {
-//     color: 'red',
-//   },
-// });
