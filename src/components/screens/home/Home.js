@@ -9,8 +9,11 @@ import {
   ImageBackground,
   SafeAreaView,
   Dimensions,
-  FlatList
+  FlatList,
+  Dimension,
+  TextInput
 } from "react-native";
+
 import HomeMovie from "./components/HomeMovie";
 import getPosterUrl from "./common/getMoviePoster";
 
@@ -18,6 +21,7 @@ const apiKey = "fc22f3679adfcc3e819328e339157dfa";
 
 const Home = ({ navigation }) => {
   const [allMovies, setAllMovies] = useState([]);
+  const [searchText, setSearchText] = useState("");
   const [mainBackgroundUrl, setMainBackgroundUrl] = useState("");
 
   useEffect(() => {
@@ -38,7 +42,6 @@ const Home = ({ navigation }) => {
       alert(error);
     }
   }
-<<<<<<< HEAD
   const styles = StyleSheet.create({
     moviesList: {
       flex: 1,
@@ -50,6 +53,33 @@ const Home = ({ navigation }) => {
       padding: 2,
       height: Dimensions.get("window").height / 2,
       width: Dimensions.get("window").width / 2 - 4
+    },
+    mainPosterContainer: {
+      width: "100%",
+      height: Dimensions.get("window").height * 0.7
+    },
+    headerText: {
+      color: "rgba(255,255,255,0.8)"
+    },
+    headerSection1: {
+      height: "40%",
+      width: "100%"
+    },
+    headerSection2: {
+      height: "50%",
+      width: "100%",
+      width: "100%",
+      padding: 20,
+      backgroundColor: "rgba(0,0,0,0.7)"
+    },
+    headerSection3: {
+      height: "10%",
+      width: "100%",
+      borderRadius: 10,
+      backgroundColor: "black",
+      paddingHorizontal: 4,
+      paddingVertical: 6,
+      flexDirection: "row"
     }
   });
   console.log("movies ----", allMovies);
@@ -68,6 +98,49 @@ const Home = ({ navigation }) => {
       ) : null} */}
 
       <ScrollView>
+        <View style={styles.mainPosterContainer}>
+          <ImageBackground
+            source={{ uri: mainBackgroundUrl ? mainBackgroundUrl : null }}
+            style={{ width: "100%", height: "100%" }}
+          >
+            <View style={styles.headerSection1} />
+            <View style={[styles.headerSection2, { justifyContent: "center" }]}>
+              <View>
+                <Text style={[styles.headerText, { fontSize: 24 }]}>
+                  Movie title
+                </Text>
+              </View>
+              <View>
+                <Text
+                  style={[styles.headerText, { fontSize: 14, marginTop: 12 }]}
+                >
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Adipisci illo nihil eius quaerat sunt, omnis recusandae,
+                  asperiores, consequuntur magni doloremque ab natus voluptatem
+                  expedita necessitatibus doloribus numquam aspernatur
+                  explicabo. Quae?
+                </Text>
+              </View>
+            </View>
+            <View
+              style={[
+                styles.headerSection3,
+                { borderWidth: 2, borderColor: "#fff" }
+              ]}
+            >
+              <View>
+                <Text style={styles.headerText}>Search</Text>
+              </View>
+              <View>
+                <TextInput
+                  value={searchText}
+                  onChangeText={text => setSearchText(text)}
+                  style={{ color: "#fff" }}
+                />
+              </View>
+            </View>
+          </ImageBackground>
+        </View>
         <View style={styles.moviesList}>
           {allMovies.length
             ? allMovies.map(item => (
@@ -80,10 +153,6 @@ const Home = ({ navigation }) => {
       </ScrollView>
     </SafeAreaView>
   );
-=======
-
-  return <SafeAreaView />;
->>>>>>> 416a8971ae2048c792a19c2ba29cac3fb6a8a70e
 };
 
 export default Home;
