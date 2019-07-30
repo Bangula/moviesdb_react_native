@@ -6,10 +6,13 @@ import {
   StyleSheet,
   ActivityIndicator,
   ScrollView,
-  Dimensions
+  Dimensions,
+  SafeAreaView
 } from "react-native";
 import axios from "axios";
 import Actor from "./components/Actor";
+import DetailsHeader from "./components/DetailsHeader";
+
 const Details = ({ navigation }) => {
   const [movieDetails, setMovieDetails] = useState({});
   const [actors, setActors] = useState([]);
@@ -63,19 +66,24 @@ const Details = ({ navigation }) => {
     }
   });
   return (
-    <ScrollView>
-      <View style={styles.actorsList}>
-        {actors.length ? (
-          actors.map(item => (
-            <View style={styles.actorWrap} key={item.id}>
-              <Actor actor={item} />
-            </View>
-          ))
-        ) : (
-          <ActivityIndicator size="large" color="#35D875" />
-        )}
-      </View>
-    </ScrollView>
+    <SafeAreaView>
+      <ScrollView>
+        <View>
+          <DetailsHeader movie={movieDetails} />
+        </View>
+        <View style={styles.actorsList}>
+          {actors.length ? (
+            actors.map(item => (
+              <View style={styles.actorWrap} key={item.id}>
+                <Actor actor={item} />
+              </View>
+            ))
+          ) : (
+            <ActivityIndicator size="large" color="#35D875" />
+          )}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

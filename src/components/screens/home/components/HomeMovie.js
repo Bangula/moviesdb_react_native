@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   ActivityIndicator
 } from "react-native";
-import getPoster from "../common/getMoviePoster";
+import { getPoster } from "../common/getMoviePoster";
 import AsyncStorage from "@react-native-community/async-storage";
 import lion from "../../../../assets/images/lion.jpg";
 
