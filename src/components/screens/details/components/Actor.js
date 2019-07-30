@@ -44,7 +44,7 @@ const Actor = props => {
   async function getActorImg(data) {
     try {
       const image = await getProfileImage(data);
-      console.log("actor img ", image);
+      // console.log("actor img ", image);
       setActorImg(image);
     } catch (err) {
       console.log(err.response);

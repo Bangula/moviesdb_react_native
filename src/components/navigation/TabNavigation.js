@@ -12,7 +12,6 @@ import Favorite from "../screens/favorite/Favorite";
 
 import logo1 from "../../assets/images/logo.png";
 import logo2 from "../../assets/images/imdb.png";
-import homeIcon from "../../assets/images/home.png";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 
