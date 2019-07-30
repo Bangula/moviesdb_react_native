@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
   Dimensions
 } from "react-native";
-import getPoster from "../../home/common/getMoviePoster";
+import { getProfileImage } from "../../home/common/getMoviePoster";
 
 const styles = StyleSheet.create({
   container: { flex: 1, flexDirection: "row" },
@@ -43,7 +43,7 @@ const Actor = props => {
 
   async function getActorImg(data) {
     try {
-      const image = await getPoster(data);
+      const image = await getProfileImage(data);
       console.log("actor img ", image);
       setActorImg(image);
     } catch (err) {

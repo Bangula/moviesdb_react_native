@@ -16,7 +16,7 @@ import {
 } from "react-native";
 
 import HomeMovie from "./components/HomeMovie";
-import getPosterUrl from "./common/getMoviePoster";
+import { getPoster } from "./common/getMoviePoster";
 
 // Components
 import BigHeader from "./components/BigHeader";
@@ -38,7 +38,7 @@ const Home = ({ navigation }) => {
         `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc`
       );
       console.log(movies);
-      const mainBg = getPosterUrl(movies.data.results[0].poster_path);
+      const mainBg = getPoster(movies.data.results[0].poster_path);
       setMainBackgroundUrl(mainBg);
       console.log(mainBg);
       setAllMovies(movies.data.results);

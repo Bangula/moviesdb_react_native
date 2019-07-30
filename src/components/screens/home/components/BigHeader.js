@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     backgroundColor: "black"
   },
   headerText: {
-    color: "rgba(255,255,255,0.8)"
+    color: "rgba(255,255,255,0.9)"
   },
   headerSection1: {
     height: "40%",
@@ -30,12 +30,12 @@ const styles = StyleSheet.create({
     width: "100%",
     width: "100%",
     padding: 20,
-    backgroundColor: "rgba(0,0,0,0.7)"
+    backgroundColor: "rgba(0,0,0,0.5)"
   },
   headerSection3: {
     height: "10%",
     width: "100%",
-    backgroundColor: "rgba(0,0,0,0.7)"
+    backgroundColor: "rgba(0,0,0,0.5)"
   },
   inputContainer: {
     borderRadius: 30,
@@ -58,6 +58,7 @@ const BigHeader = ({
     <View style={styles.mainPosterContainer}>
       <ImageBackground
         source={{ uri: mainBackgroundUrl ? mainBackgroundUrl : null }}
+        resizeMode="cover"
         style={{ width: "100%", height: "100%" }}
       >
         <View style={styles.headerSection1} />
