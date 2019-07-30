@@ -104,7 +104,7 @@ const TabNavigation = createBottomTabNavigator(
   {
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarOptions: {
-        activeTintColor: "#fff",
+        activeTintColor: "#35D875",
         showIcon: true,
         labelStyle: {
           fontSize: 12

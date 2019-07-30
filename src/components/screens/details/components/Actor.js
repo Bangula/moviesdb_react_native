@@ -15,12 +15,12 @@ import { getProfileImage } from "../../home/common/getMoviePoster";
 const styles = StyleSheet.create({
   container: { flex: 1, flexDirection: "row" },
   img: {
-    height: "100%",
+    height: Dimensions.get("window").height / 3 - 4,
     width: Dimensions.get("window").width / 2 - 4
   },
   details: {
-    width: "100%",
-    height: "100%",
+    height: Dimensions.get("window").height / 3 - 4,
+    width: Dimensions.get("window").width / 2 - 4,
     paddingLeft: 20,
     paddingRight: 10,
     backgroundColor: "#1D1D1D",

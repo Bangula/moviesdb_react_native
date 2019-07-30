@@ -65,6 +65,10 @@ const Home = ({ navigation }) => {
       padding: 2,
       height: Dimensions.get("window").height / 2,
       width: Dimensions.get("window").width / 2 - 4
+    },
+    indicator: {
+      // marginTop: 10,
+      paddingBottom: 20
     }
   });
 
@@ -73,14 +77,6 @@ const Home = ({ navigation }) => {
     getData();
   }, []);
 
-  // React.useEffect(() => {
-  //   if (keys.length) {
-  //     let data = keys.includes(`@${props.movie.id}`);
-  //     setDoesKeyExists(data);
-  //   }
-  // }, [keys]);
-
-  console.log("movies ----", allMovies);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -98,7 +94,9 @@ const Home = ({ navigation }) => {
               </View>
             ))
           ) : (
-            <ActivityIndicator size="large" color="#35D875" />
+            <View style={styles.indicator}>
+              <ActivityIndicator size="large" color="#35D875" />
+            </View>
           )}
         </View>
       </ScrollView>

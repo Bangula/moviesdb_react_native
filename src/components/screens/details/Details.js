@@ -60,9 +60,9 @@ const Details = ({ navigation }) => {
     },
     actorWrap: {
       margin: 2,
-      padding: 2,
-      height: Dimensions.get("window").height / 2,
-      width: Dimensions.get("window").width - 4
+      padding: 2
+      // height: Dimensions.get("window").height / 2,
+      // width: Dimensions.get("window").width - 4
     }
   });
   return (
