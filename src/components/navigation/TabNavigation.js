@@ -78,9 +78,28 @@ const FavoriteStack = createStackNavigator(
     }
   }
 );
-const TabNavigation = createBottomTabNavigator({
-  Home: MainStack,
-  Favorite: FavoriteStack
-});
+const TabNavigation = createBottomTabNavigator(
+  {
+    Home: MainStack,
+    Favorite: FavoriteStack
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: "#fff",
+      showIcon: true,
+      tabBarIcon: ({ tintColor }) => (
+        <View>
+          <Text style={{ color: "#fff" }}>H</Text>
+        </View>
+      ),
+      labelStyle: {
+        fontSize: 12
+      },
+      style: {
+        backgroundColor: "#1d1d1d"
+      }
+    }
+  }
+);
 
 export default TabNavigation;
