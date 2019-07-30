@@ -14,7 +14,7 @@ import searchIcon from "../../../../assets/images/search.png";
 const styles = StyleSheet.create({
   mainPosterContainer: {
     width: "100%",
-    height: Dimensions.get("window").height * 0.7,
+    height: Dimensions.get("window").height * 0.75,
     backgroundColor: "black"
   },
   headerText: {
@@ -34,12 +34,15 @@ const styles = StyleSheet.create({
   headerSection3: {
     height: "10%",
     width: "100%",
-    borderRadius: 10,
-    backgroundColor: "black",
+    backgroundColor: "rgba(0,0,0,0.7)"
+  },
+  inputContainer: {
+    borderRadius: 30,
+    backgroundColor: "#1d1d1d",
     paddingHorizontal: 4,
     flexDirection: "row",
     borderWidth: 2,
-    borderColor: "gray",
+    borderColor: "rgba(255,255,255,0.2)",
     alignItems: "center"
   }
 });
@@ -70,22 +73,24 @@ const BigHeader = ({
           </View>
         </View>
         <View style={[styles.headerSection3]}>
-          <View style={{ width: 50, paddingLeft: 10 }}>
-            <Image source={searchIcon} style={{ width: 25, height: 25 }} />
-          </View>
-          <View />
-          <View style={{ flex: 1 }}>
-            <TextInput
-              value={searchText}
-              onChangeText={text => setSearchText(text)}
-              style={{
-                color: "#fff",
-                height: "100%",
-                width: "100%"
-              }}
-              placeholder="Search..."
-              placeholderTextColor="#fff"
-            />
+          <View style={styles.inputContainer}>
+            <View style={{ width: 50, paddingLeft: 10 }}>
+              <Image source={searchIcon} style={{ width: 25, height: 25 }} />
+            </View>
+            <View />
+            <View style={{ flex: 1 }}>
+              <TextInput
+                value={searchText}
+                onChangeText={text => setSearchText(text)}
+                style={{
+                  color: "#fff",
+                  height: "100%",
+                  width: "100%"
+                }}
+                placeholder="Search..."
+                placeholderTextColor="#fff"
+              />
+            </View>
           </View>
         </View>
       </ImageBackground>
