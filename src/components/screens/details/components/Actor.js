@@ -63,7 +63,7 @@ const Actor = props => {
           </View>
         </View>
       ) : (
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#35D875" />
       )}
     </>
   );
