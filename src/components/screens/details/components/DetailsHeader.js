@@ -8,6 +8,7 @@ import {
   Dimensions
 } from "react-native";
 import { getPoster } from "../../home/common/getMoviePoster";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const styles = StyleSheet.create({
   container: { backgroundColor: "black", paddingBottom: 30 },
@@ -28,9 +29,13 @@ const styles = StyleSheet.create({
 
 const DetailsHeader = ({ movie }) => {
   const [bgImage, setBgImage] = useState("");
+  const [ratingStars, setRatingStars] = useState();
+
   useEffect(() => {
     if (Object.keys(movie).length) {
       setBgImage(getPoster(movie.poster_path));
+      let rating = Math.round(movie.vote_average);
+      setRatingStars(rating);
     }
   }, [movie]);
 
@@ -108,9 +113,9 @@ const DetailsHeader = ({ movie }) => {
               : null}
           </View>
         </View>
-        <View style={{ paddingHorizontal: 20, marginTop: 30 }}>
+        <View style={{ paddingHorizontal: 20, marginTop: 10 }}>
           <Text style={[styles.headerText, { fontWeight: "bold" }]}>
-            RATING
+            RATING {ratingStars}/10
           </Text>
           <View
             style={{
@@ -119,22 +124,23 @@ const DetailsHeader = ({ movie }) => {
               flexDirection: "row"
             }}
           >
-            {Object.keys(movie).length
+            {/* {Object.keys(movie).length
               ? movie.genres.map(item => {
                   return (
                     <View
                       key={item.id}
-                      style={{ marginRight: 20, marginTop: 10 }}
+                      style={{ marginRight: 5, marginTop: 10 }}
                     >
-                      <Text
-                        style={[styles.headerText, { fontStyle: "italic" }]}
-                      >
-                        {item.name}
-                      </Text>
+                      <Icon name="star" size={20} color="red" />
                     </View>
                   );
                 })
-              : null}
+              : null} */}
+            {[...Array(ratingStars)].map((x, i) => (
+              <View key={i} style={{ marginRight: 5, marginTop: 10 }}>
+                <Icon name="star" size={20} color="#35D875" />
+              </View>
+            ))}
           </View>
         </View>
       </View>
