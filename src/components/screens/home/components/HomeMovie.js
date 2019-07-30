@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   ActivityIndicator
 } from "react-native";
-import { getPoster } from "../common/getMoviePoster";
+import { getPosterSmall } from "../common/getMoviePoster";
 import AsyncStorage from "@react-native-community/async-storage";
 import lion from "../../../../assets/images/lion.jpg";
 
@@ -27,7 +27,7 @@ const HomeMovie = props => {
 
   const getMePoster = async () => {
     try {
-      let image = await getPoster(props.movie.poster_path);
+      let image = await getPosterSmall(props.movie.poster_path);
       if (image) {
         setImg(image);
       }

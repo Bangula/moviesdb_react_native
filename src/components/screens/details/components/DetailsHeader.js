@@ -29,7 +29,9 @@ const styles = StyleSheet.create({
 const DetailsHeader = ({ movie }) => {
   const [bgImage, setBgImage] = useState("");
   useEffect(() => {
-    Object.keys(movie).length ? setBgImage(getPoster(movie.poster_path)) : null;
+    if (Object.keys(movie).length) {
+      setBgImage(getPoster(movie.poster_path));
+    }
   }, [movie]);
 
   return (
@@ -108,7 +110,7 @@ const DetailsHeader = ({ movie }) => {
         </View>
         <View style={{ paddingHorizontal: 20, marginTop: 30 }}>
           <Text style={[styles.headerText, { fontWeight: "bold" }]}>
-            GENRES
+            RATING
           </Text>
           <View
             style={{
