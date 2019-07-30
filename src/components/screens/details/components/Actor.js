@@ -21,10 +21,16 @@ const styles = StyleSheet.create({
   details: {
     width: "100%",
     height: "100%",
-    paddingLeft: 30,
-    backgroundColor: "#1D1D1D"
+    paddingLeft: 20,
+    paddingRight: 10,
+    backgroundColor: "#1D1D1D",
+    flexShrink: 1
   },
-  detailsName: { paddingTop: 30, fontSize: 20, color: "white" },
+  detailsName: {
+    paddingTop: 30,
+    fontSize: 20,
+    color: "white"
+  },
   detailsRole: { color: "white" }
 });
 
