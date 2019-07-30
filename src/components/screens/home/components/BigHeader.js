@@ -6,7 +6,8 @@ import {
   TextInput,
   ImageBackground,
   Dimensions,
-  Image
+  Image,
+  ActivityIndicator
 } from "react-native";
 
 import searchIcon from "../../../../assets/images/search.png";
@@ -62,12 +63,24 @@ const BigHeader = ({
         <View style={styles.headerSection1} />
         <View style={[styles.headerSection2, { justifyContent: "center" }]}>
           <View>
-            <Text style={[styles.headerText, { fontSize: 24 }]}>
+            <Text
+              style={[styles.headerText, { fontSize: 24, fontWeight: "bold" }]}
+            >
               {allMovies.length ? allMovies[0].title : null}
             </Text>
           </View>
           <View style={{ overflow: "hidden" }}>
-            <Text style={[styles.headerText, { fontSize: 14, marginTop: 12 }]}>
+            <Text
+              style={[
+                styles.headerText,
+                {
+                  fontSize: 14,
+                  marginTop: 12,
+                  fontStyle: "italic",
+                  lineHeight: 18
+                }
+              ]}
+            >
               {allMovies.length ? allMovies[0].overview : null}
             </Text>
           </View>
