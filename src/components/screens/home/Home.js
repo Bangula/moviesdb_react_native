@@ -20,17 +20,14 @@ import getPosterUrl from "./common/getMoviePoster";
 
 // Components
 import BigHeader from "./components/BigHeader";
-
+import AsyncStorage from "@react-native-community/async-storage";
 const apiKey = "fc22f3679adfcc3e819328e339157dfa";
 
 const Home = ({ navigation }) => {
   const [allMovies, setAllMovies] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [mainBackgroundUrl, setMainBackgroundUrl] = useState("");
-
-  useEffect(() => {
-    getData();
-  }, []);
+  const [keys, setKeys] = React.useState([]);
 
   async function getData() {
     try {
@@ -42,18 +39,26 @@ const Home = ({ navigation }) => {
       setMainBackgroundUrl(mainBg);
       console.log(mainBg);
       setAllMovies(movies.data.results);
-    } catch (error) {
-      alert(error);
-    }
+    } catch (error) {}
   }
+
+  const getAllKeys = async () => {
+    try {
+      let key = await AsyncStorage.getAllKeys();
+      setKeys(key);
+    } catch (e) {
+      // read key error
+    }
+  };
+
   const styles = StyleSheet.create({
     moviesList: {
       flex: 1,
       flexDirection: "row",
       justifyContent: "center",
       flexWrap: "wrap",
-      marginTop: 20,
-      backgroundColor: "#666666"
+      paddingTop: 10,
+      backgroundColor: "black"
     },
     imgWrap: {
       margin: 2,
@@ -62,25 +67,22 @@ const Home = ({ navigation }) => {
       width: Dimensions.get("window").width / 2 - 4
     }
   });
+
+  useEffect(() => {
+    getAllKeys();
+    getData();
+  }, []);
+
+  // React.useEffect(() => {
+  //   if (keys.length) {
+  //     let data = keys.includes(`@${props.movie.id}`);
+  //     setDoesKeyExists(data);
+  //   }
+  // }, [keys]);
+
   console.log("movies ----", allMovies);
   return (
-    <SafeAreaView style={{ backgroundColor: "black" }}>
-      {/* {allMovies.length ? (
-        <FlatList
-          style={styles.moviesList}
-          data={allMovies}
-          renderItem={({ item }) => (
-            <View style={styles.imgWrap}>
-               <HomeMovie navigation={navigation} movie={item} /> 
-              <Text>{item.id}</Text>
-            </View>
-          )}
-        />
-      ) : (
-        <ActivityIndicator size="large" color="#0000ff" />
-      )}
-     */}
-
+    <SafeAreaView style={styles.container}>
       <ScrollView>
         <BigHeader
           allMovies={allMovies}
@@ -92,7 +94,7 @@ const Home = ({ navigation }) => {
           {allMovies.length ? (
             allMovies.map(item => (
               <View style={styles.imgWrap} key={item.id}>
-                <HomeMovie navigation={navigation} movie={item} />
+                <HomeMovie navigation={navigation} movie={item} keys={keys} />
               </View>
             ))
           ) : (

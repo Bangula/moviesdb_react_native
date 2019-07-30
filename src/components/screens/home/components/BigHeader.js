@@ -14,7 +14,7 @@ import searchIcon from "../../../../assets/images/search.png";
 const styles = StyleSheet.create({
   mainPosterContainer: {
     width: "100%",
-    height: Dimensions.get("window").height * 0.75,
+    height: Dimensions.get("window").height * 0.73,
     backgroundColor: "black"
   },
   headerText: {

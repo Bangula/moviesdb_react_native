@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Image,
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
 
 const HomeMovie = props => {
   const [img, setImg] = React.useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const getMePoster = async () => {
     try {
@@ -35,10 +36,6 @@ const HomeMovie = props => {
     }
   };
 
-  React.useEffect(() => {
-    getMePoster();
-  }, []);
-
   const storeData = async id => {
     try {
       await AsyncStorage.setItem(`@${id}`, JSON.stringify(props.movie));
@@ -47,13 +44,26 @@ const HomeMovie = props => {
     }
   };
 
-  console.log("home movie props", props);
+  React.useEffect(() => {
+    getMePoster();
+
+    // props.doesKeyExists ? setIsDisabled(props.doesKeyExists) : null;
+  }, []);
+
+  React.useEffect(() => {
+    if (props.keys.length) {
+      let data = props.keys.includes(`@${props.movie.id}`);
+      setIsDisabled(data);
+    }
+  }, [props.keys]);
+
   return (
     <View style={{ flex: 1 }}>
       {img ? (
         <>
           <TouchableOpacity
             style={{ flex: 1 }}
+            activeOpacity={0.9}
             onPress={() =>
               props.navigation.navigate("Details", { id: props.movie.id })
             }
@@ -61,8 +71,12 @@ const HomeMovie = props => {
             <Image style={styles.img} source={{ uri: img }} />
           </TouchableOpacity>
           <Button
-            title="Add to Favourites"
-            onPress={() => storeData(props.movie.id)}
+            disabled={isDisabled}
+            title={isDisabled ? "Your favorite" : "Add to Favorites"}
+            onPress={() => {
+              setIsDisabled(true);
+              storeData(props.movie.id);
+            }}
             color="#35D875"
           />
         </>
