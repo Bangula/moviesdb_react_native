@@ -11,7 +11,8 @@ import {
   Dimensions,
   FlatList,
   Dimension,
-  TextInput
+  TextInput,
+  ActivityIndicator
 } from "react-native";
 
 import HomeMovie from "./components/HomeMovie";
