@@ -72,7 +72,7 @@ const Details = ({ navigation }) => {
             </View>
           ))
         ) : (
-          <ActivityIndicator size="large" color="#0000ff" />
+          <ActivityIndicator size="large" color="#35D875" />
         )}
       </View>
     </ScrollView>

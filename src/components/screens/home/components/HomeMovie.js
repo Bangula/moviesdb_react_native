@@ -63,10 +63,11 @@ const HomeMovie = props => {
           <Button
             title="Add to Favourites"
             onPress={() => storeData(props.movie.id)}
+            color="#35D875"
           />
         </>
       ) : (
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#35D875" />
       )}
     </View>
   );

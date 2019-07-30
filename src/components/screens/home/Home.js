@@ -53,7 +53,7 @@ const Home = ({ navigation }) => {
       justifyContent: "center",
       flexWrap: "wrap",
       marginTop: 20,
-      backgroundColor: "#1d1d1d"
+      backgroundColor: "#666666"
     },
     imgWrap: {
       margin: 2,
@@ -96,7 +96,7 @@ const Home = ({ navigation }) => {
               </View>
             ))
           ) : (
-            <ActivityIndicator size="large" color="#0000ff" />
+            <ActivityIndicator size="large" color="#35D875" />
           )}
         </View>
       </ScrollView>
