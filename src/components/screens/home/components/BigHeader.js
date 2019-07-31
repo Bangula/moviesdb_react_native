@@ -11,6 +11,7 @@ import {
 } from "react-native";
 
 import searchIcon from "../../../../assets/images/search.png";
+import { debounce } from "lodash";
 
 const styles = StyleSheet.create({
   mainPosterContainer: {
@@ -48,12 +49,12 @@ const styles = StyleSheet.create({
   }
 });
 
-const BigHeader = ({
-  allMovies,
-  mainBackgroundUrl,
-  searchText,
-  setSearchText
-}) => {
+const BigHeader = ({ allMovies, mainBackgroundUrl, getData }) => {
+  const handleSearch = debounce(text => {
+    if (text !== "") getData(text);
+    else getData();
+  }, 500);
+
   return (
     <View style={styles.mainPosterContainer}>
       <ImageBackground
@@ -94,8 +95,7 @@ const BigHeader = ({
             <View />
             <View style={{ flex: 1 }}>
               <TextInput
-                value={searchText}
-                onChangeText={text => setSearchText(text)}
+                onChangeText={text => handleSearch(text)}
                 style={{
                   color: "#fff",
                   height: "100%",

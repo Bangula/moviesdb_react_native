@@ -66,7 +66,7 @@ const Details = ({ navigation }) => {
     }
   });
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ backgroundColor: "black" }}>
       <ScrollView>
         <View>
           <DetailsHeader movie={movieDetails} />
