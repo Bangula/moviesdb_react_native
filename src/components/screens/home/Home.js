@@ -91,8 +91,17 @@ const Home = ({ navigation }) => {
   };
 
   const styles = StyleSheet.create({
+    movieListHeight: {
+      height: Dimensions.get("window").height,
+      flexDirection: "row",
+      justifyContent: "center",
+      flexWrap: "wrap",
+      paddingTop: 10,
+      backgroundColor: "black"
+    },
     moviesList: {
       flex: 1,
+
       flexDirection: "row",
       justifyContent: "center",
       flexWrap: "wrap",
@@ -105,10 +114,7 @@ const Home = ({ navigation }) => {
       height: Dimensions.get("window").height / 2,
       width: Dimensions.get("window").width / 2 - 4
     },
-    indicator: {
-      // marginTop: 10,
-      paddingBottom: 20
-    }
+    indicator: {}
   });
 
   useEffect(() => {
@@ -118,10 +124,7 @@ const Home = ({ navigation }) => {
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: "black" }]}>
       <NavigationEvents
-        // onWillFocus={payload => console.log("will focus", payload)}
         onDidFocus={payload => getAllKeys()} // runs every time when component shows
-        // onWillBlur={payload => console.log("will blur", payload)}
-        // onDidBlur={payload => console.log("did blur", payload)}
       />
       <ScrollView>
         {allMovies.length ? (
@@ -132,36 +135,35 @@ const Home = ({ navigation }) => {
             setSearch={setSearch}
             navigation={navigation}
           />
-        ) : (
-          <ActivityIndicator size="large" color="#35D875" />
-        )}
+        ) : null}
 
-        <View style={styles.moviesList}>
-          {allMovies.length ? (
-            allMovies.map(item => (
-              <View style={styles.imgWrap} key={item.id}>
-                <HomeMovie navigation={navigation} movie={item} keys={keys} />
-              </View>
-            ))
-          ) : (
-            <View style={styles.indicator}>
-              <ActivityIndicator size="large" color="#35D875" />
-            </View>
-          )}
-        </View>
         <View
-          style={{
-            paddingHorizontal: 4,
-            backgroundColor: "black",
-            marginTop: 10
-          }}
+          style={allMovies.length ? styles.moviesList : styles.movieListHeight}
         >
-          <Button
-            color="#35D875"
-            title="Load more..."
-            onPress={() => updatePageNumber()}
-          />
+          {allMovies.length
+            ? allMovies.map(item => (
+                <View style={styles.imgWrap} key={item.id}>
+                  <HomeMovie navigation={navigation} movie={item} keys={keys} />
+                </View>
+              ))
+            : null}
+          <ActivityIndicator size="large" color="#35D875" />
         </View>
+        {allMovies.length ? (
+          <View
+            style={{
+              paddingHorizontal: 4,
+              backgroundColor: "black",
+              marginTop: 10
+            }}
+          >
+            <Button
+              color="#35D875"
+              title="Load more..."
+              onPress={() => updatePageNumber()}
+            />
+          </View>
+        ) : null}
       </ScrollView>
     </SafeAreaView>
   );

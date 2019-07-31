@@ -31,12 +31,26 @@ const styles = StyleSheet.create({
 const DetailsHeader = ({ movie }) => {
   const [bgImage, setBgImage] = useState("");
   const [ratingStars, setRatingStars] = useState();
-
+  const [green, setGreen] = useState("#35D875");
+  const [lightGreen, setLightGReen] = useState("#bfff00");
+  const [orange, setOrange] = useState("#ffaa2a");
+  const [red, setRed] = useState("#ff0066");
+  const [color, setColor] = useState("");
   useEffect(() => {
     if (Object.keys(movie).length) {
       setBgImage(getPoster(movie.poster_path));
       let rating = Math.round(movie.vote_average);
       setRatingStars(rating);
+
+      if (rating >= 0 && rating <= 3) {
+        setColor(red);
+      } else if (rating > 3 && rating <= 5) {
+        setColor(orange);
+      } else if (rating > 5 && rating <= 7) {
+        setColor(lightGreen);
+      } else if (rating > 7) {
+        setColor(green);
+      }
     }
   }, [movie]);
 
@@ -130,21 +144,9 @@ const DetailsHeader = ({ movie }) => {
               flexDirection: "row"
             }}
           >
-            {/* {Object.keys(movie).length
-              ? movie.genres.map(item => {
-                  return (
-                    <View
-                      key={item.id}
-                      style={{ marginRight: 5, marginTop: 10 }}
-                    >
-                      <Icon name="star" size={20} color="red" />
-                    </View>
-                  );
-                })
-              : null} */}
             {[...Array(ratingStars)].map((x, i) => (
               <View key={i} style={{ marginRight: 5, marginTop: 10 }}>
-                <Icon name="star" size={20} color="#35D875" />
+                <Icon name="star" size={20} color={color ? color : green} />
               </View>
             ))}
           </View>
