@@ -46,8 +46,6 @@ const HomeMovie = props => {
 
   React.useEffect(() => {
     getMePoster();
-
-    // props.doesKeyExists ? setIsDisabled(props.doesKeyExists) : null;
   }, []);
 
   React.useEffect(() => {

@@ -14,7 +14,7 @@ import {
   TextInput,
   ActivityIndicator
 } from "react-native";
-
+import { NavigationEvents } from "react-navigation";
 import HomeMovie from "./components/HomeMovie";
 import { getPoster } from "./common/getMoviePoster";
 
@@ -73,12 +73,17 @@ const Home = ({ navigation }) => {
   });
 
   useEffect(() => {
-    getAllKeys();
     getData();
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
+      <NavigationEvents
+        // onWillFocus={payload => console.log("will focus", payload)}
+        onDidFocus={payload => getAllKeys()} // runs every time when component shows
+        // onWillBlur={payload => console.log("will blur", payload)}
+        // onDidBlur={payload => console.log("did blur", payload)}
+      />
       <ScrollView>
         <BigHeader
           allMovies={allMovies}
