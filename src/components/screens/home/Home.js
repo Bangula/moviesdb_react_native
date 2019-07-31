@@ -21,6 +21,7 @@ import { getPoster } from "./common/getMoviePoster";
 // Components
 import BigHeader from "./components/BigHeader";
 import AsyncStorage from "@react-native-community/async-storage";
+
 const apiKey = "fc22f3679adfcc3e819328e339157dfa";
 
 const Home = ({ navigation }) => {
@@ -79,6 +80,7 @@ const Home = ({ navigation }) => {
     try {
       let key = await AsyncStorage.getAllKeys();
       setKeys(key);
+      console.log("get all keys invoked");
     } catch (e) {
       // read key error
     }
@@ -112,7 +114,7 @@ const Home = ({ navigation }) => {
   useEffect(() => {
     getData();
   }, []);
-
+  console.log("home kljucevi", keys);
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: "black" }]}>
       <NavigationEvents

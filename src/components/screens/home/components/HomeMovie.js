@@ -52,6 +52,8 @@ const HomeMovie = props => {
     if (props.keys.length) {
       let data = props.keys.includes(`@${props.movie.id}`);
       setIsDisabled(data);
+    } else {
+      setIsDisabled(false);
     }
   }, [props.keys]);
 

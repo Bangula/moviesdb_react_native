@@ -65,38 +65,41 @@ const Favorites = props => {
     },
     indicatorContainer: {
       width: "100%"
+    },
+    noData: {
+      width: "100%",
+      alignItems: "center"
     }
   });
   return (
     <View style={styles.moviesList}>
       <NavigationEvents
-        // onWillFocus={payload => console.log("will focus", payload)}
-        onDidFocus={payload => getAllKeys()} // runs every time when component shows
-        // onWillBlur={payload => console.log("will blur", payload)}
-        // onDidBlur={payload => console.log("did blur", payload)}
+        onDidFocus={payload => getAllKeys()} // runs every time when component show
       />
-
-      {favorites.length ? (
-        <>
-          <FlatList
-            keyExtractor={(item, index) => index.toString()}
-            data={favorites}
-            ListFooterComponent={
-              <Button onPress={clearAll} title="remove all" />
-            }
-            renderItem={({ item }) => (
-              <FavoriteMovie
-                movie={item}
-                navigation={props.navigation}
-                getAllKeys={() => getAllKeys()}
-              />
-            )}
-          />
-          {/* <Button onPress={clearAll} title="remove all" /> */}
-        </>
+      {keys.length ? (
+        favorites.length ? (
+          <>
+            <FlatList
+              keyExtractor={(item, index) => index.toString()}
+              data={favorites}
+              ListFooterComponent={
+                <Button onPress={clearAll} title="remove all" />
+              }
+              renderItem={({ item }) => (
+                <FavoriteMovie movie={item} getAllKeys={() => getAllKeys()} />
+              )}
+            />
+          </>
+        ) : (
+          <View style={styles.indicatorContainer}>
+            <ActivityIndicator size="large" color="#35D875" />
+          </View>
+        )
       ) : (
-        <View style={styles.indicatorContainer}>
-          <ActivityIndicator size="large" color="#35D875" />
+        <View style={styles.noData}>
+          <Text style={{ color: "white" }}>
+            The list of Favorite Movies is empty.
+          </Text>
         </View>
       )}
     </View>
