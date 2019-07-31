@@ -27,27 +27,24 @@ const Home = ({ navigation }) => {
   const [allMovies, setAllMovies] = useState([]);
   const [keys, setKeys] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     getAllKeys();
-    getData();
-  }, [pageNumber]);
+  }, []);
 
-  // async function getData() {
-  //   try {
-  //     const movies = await axios.get(
-  //       `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc`
-  //     );
-  //     console.log(movies);
-  //     const mainBg = getPoster(movies.data.results[0].poster_path);
-  //     setMainBackgroundUrl(mainBg);
-  //     setAllMovies(movies.data.results);
-  //   } catch (error) {}
-  // }
+  useEffect(() => {
+    getData(searchQuery);
+  }, [pageNumber, searchQuery]);
+
   let mainBackgroundUrl;
   if (allMovies.length) {
     mainBackgroundUrl = getPoster(allMovies[0].poster_path);
   }
+
+  const setSearch = text => {
+    setSearchQuery(text);
+  };
 
   async function getData(searchQuery) {
     if (searchQuery) {
@@ -61,6 +58,7 @@ const Home = ({ navigation }) => {
         .get(url)
         .then(res => {
           setAllMovies(res.data.results);
+          setSearchQuery("");
         })
         .catch(err => alert(err));
     } else {
@@ -128,6 +126,7 @@ const Home = ({ navigation }) => {
           allMovies={allMovies}
           mainBackgroundUrl={mainBackgroundUrl}
           getData={getData}
+          setSearch={setSearch}
         />
         <View style={styles.moviesList}>
           {allMovies.length ? (

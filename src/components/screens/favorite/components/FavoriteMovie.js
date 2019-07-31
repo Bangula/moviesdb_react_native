@@ -5,7 +5,8 @@ import {
   Image,
   Button,
   StyleSheet,
-  Dimensions
+  Dimensions,
+  TouchableOpacity
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 const FavoriteMovie = props => {
@@ -36,14 +37,18 @@ const FavoriteMovie = props => {
 
   console.log("favorite movie props", props.movie);
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{props.movie.title}</Text>
-      <Button
-        title="Remove"
-        color="#ff0066"
-        onPress={() => removeValue(props.movie.id)}
-      />
-    </View>
+    <TouchableOpacity
+      onPress={() => props.navigation.push("Details", { id: props.movie.id })}
+    >
+      <View style={styles.container}>
+        <Text style={styles.title}>{props.movie.title}</Text>
+        <Button
+          title="Remove"
+          color="#ff0066"
+          onPress={() => removeValue(props.movie.id)}
+        />
+      </View>
+    </TouchableOpacity>
   );
 };
 
