@@ -49,10 +49,15 @@ const styles = StyleSheet.create({
   }
 });
 
-const BigHeader = ({ allMovies, mainBackgroundUrl, getData }) => {
+const BigHeader = ({ allMovies, mainBackgroundUrl, getData, setSearch }) => {
   const handleSearch = debounce(text => {
-    if (text !== "") getData(text);
-    else getData();
+    // if (text !== "") getData(text);
+    // else getData();
+    if (!text) {
+      setSearch("a");
+    } else {
+      setSearch(text);
+    }
   }, 500);
 
   return (

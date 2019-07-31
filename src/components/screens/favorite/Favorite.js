@@ -11,6 +11,7 @@ import {
 import { NavigationEvents } from "react-navigation";
 import AsyncStorage from "@react-native-community/async-storage";
 import FavoriteMovie from "./components/FavoriteMovie";
+
 const Favorites = props => {
   const [keys, setKeys] = React.useState([]);
   const [favorites, setFavorites] = useState([]);

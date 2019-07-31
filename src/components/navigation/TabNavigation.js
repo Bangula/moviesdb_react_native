@@ -59,14 +59,15 @@ const MainStack = createStackNavigator(
 );
 const FavoriteStack = createStackNavigator(
   {
-    Favorite
+    Favorite,
+    Details
   },
   {
     defaultNavigationOptions: {
       headerTitle: (
         <View style={styles.headerContainer}>
           <View style={{ marginLeft: 10 }}>
-            <Image source={logo1} style={{ width: 0 }} resizeMode="contain" />
+            <Image source={logo1} style={{ width: 80 }} resizeMode="contain" />
           </View>
           <View style={[styles.logoContainer]}>
             <Image source={logo2} style={{ width: 80 }} resizeMode="contain" />
