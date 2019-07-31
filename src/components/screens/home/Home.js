@@ -138,8 +138,8 @@ const Home = ({ navigation }) => {
 
         <View style={styles.moviesList}>
           {allMovies.length ? (
-            allMovies.map(item => (
-              <View style={styles.imgWrap} key={item.id}>
+            allMovies.map((item, i) => (
+              <View style={styles.imgWrap} key={i}>
                 <HomeMovie navigation={navigation} movie={item} keys={keys} />
               </View>
             ))

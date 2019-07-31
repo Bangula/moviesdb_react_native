@@ -6,7 +6,8 @@ import {
   ImageBackground,
   StyleSheet,
   Dimensions,
-  ActivityIndicator
+  ActivityIndicator,
+  ScrollView
 } from "react-native";
 import { getPoster } from "../../home/common/getMoviePoster";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -39,6 +40,19 @@ const DetailsHeader = ({ movie }) => {
       setRatingStars(rating);
     }
   }, [movie]);
+
+  let hours, minutes, runtime, budget, revenue;
+  if (Object.keys(movie).length) {
+    hours = Math.floor(movie.runtime / 60);
+    minutes = movie.runtime % 60;
+    runtime = `${hours}h ${minutes}m`;
+
+    budget = movie.budget;
+    budget = budget.toLocaleString("en");
+
+    revenue = movie.revenue;
+    revenue = revenue.toLocaleString("en");
+  }
 
   return (
     <View style={[styles.container]}>
@@ -149,6 +163,29 @@ const DetailsHeader = ({ movie }) => {
             ))}
           </View>
         </View>
+
+        <ScrollView
+          style={{
+            width: "100%",
+            paddingTop: 20,
+            paddingBottom: 20,
+            paddingLeft: 10,
+            paddingRight: 10,
+            backgroundColor: "rgba(255,255,255,0.3)"
+          }}
+          horizontal={true}
+          centerContent={true}
+        >
+          <View style={{ width: Dimensions.get("window").width * 0.5 }}>
+            <Text style={[styles.headerText]}>Running time: {runtime}</Text>
+          </View>
+          <View style={{ width: Dimensions.get("window").width * 0.5 }}>
+            <Text style={[styles.headerText]}>Budget: {budget}</Text>
+          </View>
+          <View style={{ width: Dimensions.get("window").width * 0.5 }}>
+            <Text style={[styles.headerText]}>Revenue: {revenue}</Text>
+          </View>
+        </ScrollView>
       </View>
     </View>
   );
