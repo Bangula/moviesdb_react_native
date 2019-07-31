@@ -73,8 +73,8 @@ const Details = ({ navigation }) => {
         </View>
         <View style={styles.actorsList}>
           {actors.length ? (
-            actors.map(item => (
-              <View style={styles.actorWrap} key={item.id}>
+            actors.map((item, i) => (
+              <View style={styles.actorWrap} key={i}>
                 <Actor actor={item} />
               </View>
             ))
