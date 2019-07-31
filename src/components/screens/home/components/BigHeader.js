@@ -7,6 +7,7 @@ import {
   ImageBackground,
   Dimensions,
   Image,
+  Button,
   ActivityIndicator
 } from "react-native";
 
@@ -23,11 +24,11 @@ const styles = StyleSheet.create({
     color: "rgba(255,255,255,0.9)"
   },
   headerSection1: {
-    height: "40%",
+    height: "50%",
     width: "100%"
   },
   headerSection2: {
-    height: "50%",
+    height: "40%",
     width: "100%",
     width: "100%",
     padding: 20,
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const BigHeader = ({ allMovies, mainBackgroundUrl, getData, setSearch }) => {
+const BigHeader = ({ allMovies, mainBackgroundUrl, setSearch, navigation }) => {
   const handleSearch = debounce(text => {
     // if (text !== "") getData(text);
     // else getData();
@@ -88,8 +89,21 @@ const BigHeader = ({ allMovies, mainBackgroundUrl, getData, setSearch }) => {
                 }
               ]}
             >
-              {allMovies.length ? allMovies[0].overview : null}
+              {allMovies[0].overview.length > 200
+                ? allMovies[0].overview.substring(0, 200)
+                : allMovies[0].overview}
             </Text>
+            {allMovies[0].overview.length > 200 ? (
+              <View style={{ marginTop: 10 }}>
+                <Button
+                  color="transparent"
+                  onPress={() =>
+                    navigation.push("Details", { id: allMovies[0].id })
+                  }
+                  title="Read more..."
+                />
+              </View>
+            ) : null}
           </View>
         </View>
         <View style={[styles.headerSection3]}>

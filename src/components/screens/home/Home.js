@@ -122,12 +122,18 @@ const Home = ({ navigation }) => {
         // onDidBlur={payload => console.log("did blur", payload)}
       />
       <ScrollView>
-        <BigHeader
-          allMovies={allMovies}
-          mainBackgroundUrl={mainBackgroundUrl}
-          getData={getData}
-          setSearch={setSearch}
-        />
+        {allMovies.length ? (
+          <BigHeader
+            allMovies={allMovies}
+            mainBackgroundUrl={mainBackgroundUrl}
+            getData={getData}
+            setSearch={setSearch}
+            navigation={navigation}
+          />
+        ) : (
+          <ActivityIndicator size="large" color="#35D875" />
+        )}
+
         <View style={styles.moviesList}>
           {allMovies.length ? (
             allMovies.map(item => (
