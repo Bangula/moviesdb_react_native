@@ -62,9 +62,7 @@ const Actor = props => {
             <Text style={styles.detailsRole}>{props.actor.character}</Text>
           </View>
         </View>
-      ) : (
-        <ActivityIndicator size="large" color="#35D875" />
-      )}
+      ) : null}
     </>
   );
 };

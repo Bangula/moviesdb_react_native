@@ -5,13 +5,14 @@ import {
   Image,
   ImageBackground,
   StyleSheet,
-  Dimensions
+  Dimensions,
+  ActivityIndicator
 } from "react-native";
 import { getPoster } from "../../home/common/getMoviePoster";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 const styles = StyleSheet.create({
-  container: { backgroundColor: "black", paddingBottom: 30 },
+  container: { backgroundColor: "black", paddingBottom: 10 },
   ImageContainer: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height * 0.8
@@ -58,11 +59,16 @@ const DetailsHeader = ({ movie }) => {
       </View>
       <View style={[styles.imageContainer]}>
         <View style={[styles.imagePlace]}>
-          <View style={{ width: "50%", height: 350 }}>
-            <Image
-              source={{ uri: bgImage }}
-              style={{ width: "100%", height: "100%" }}
-            />
+          <View style={{ width: "60%", height: 350 }}>
+            {bgImage ? (
+              <Image
+                source={{ uri: bgImage }}
+                resizeMode="stretch"
+                style={{ width: "100%", height: "100%" }}
+              />
+            ) : (
+              <ActivityIndicator size="small" color="#00ff00" />
+            )}
           </View>
         </View>
       </View>
