@@ -35,6 +35,9 @@ const Home = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
+    if (pageNumber > 1) {
+      getData(searchQuery);
+    }
     getData(searchQuery);
   }, [pageNumber, searchQuery]);
 
@@ -49,10 +52,13 @@ const Home = ({ navigation }) => {
 
   const setSearch = text => {
     setSearchQuery(text);
+    if (text === "a") setPageNumber(1);
   };
 
   async function getData(text) {
-    if (text.length) {
+    console.log("pageNum:", pageNumber);
+    console.log("text:", text);
+    if (searchQuery.length) {
       let url;
       if (text.length < 2) {
         url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&page=1`;
@@ -65,7 +71,7 @@ const Home = ({ navigation }) => {
           setAllMovies(res.data.results);
         })
         .catch(err => alert(err));
-    } else if (text.length <= 0) {
+    } else {
       axios
         .get(
           `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&page=${pageNumber}`
@@ -121,9 +127,6 @@ const Home = ({ navigation }) => {
     indicator: {}
   });
 
-  useEffect(() => {
-    getData();
-  }, []);
   console.log("home kljucevi", keys);
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: "black" }]}>
