@@ -169,23 +169,51 @@ const DetailsHeader = ({ movie }) => {
         <ScrollView
           style={{
             width: "100%",
-            paddingTop: 20,
-            paddingBottom: 20,
-            paddingLeft: 10,
-            paddingRight: 10,
-            backgroundColor: "rgba(255,255,255,0.3)"
+            paddingTop: 10,
+            paddingBottom: 10,
+            paddingLeft: 5,
+            paddingRight: 5,
+            backgroundColor: "rgba(255,255,255,0.3)",
+            alignContent: "center"
           }}
           horizontal={true}
           centerContent={true}
         >
-          <View style={{ width: Dimensions.get("window").width * 0.5 }}>
-            <Text style={[styles.headerText]}>Running time: {runtime}</Text>
+          <View
+            style={{
+              paddingRight: 20,
+              justifyContent: "center",
+              flexDirection: "row"
+            }}
+          >
+            <Text>
+              <Icon name="clock-o" size={20} color="#35D875" />
+            </Text>
+            <Text style={[styles.headerText]}> Running time: {runtime}</Text>
           </View>
-          <View style={{ width: Dimensions.get("window").width * 0.5 }}>
-            <Text style={[styles.headerText]}>Budget: {budget}</Text>
+          <View
+            style={{
+              paddingRight: 20,
+              justifyContent: "center",
+              flexDirection: "row"
+            }}
+          >
+            <Text>
+              <Icon name="money" size={20} color="#35D875" />
+            </Text>
+            <Text style={[styles.headerText]}> Budget: {budget}</Text>
           </View>
-          <View style={{ width: Dimensions.get("window").width * 0.5 }}>
-            <Text style={[styles.headerText]}>Revenue: {revenue}</Text>
+          <View
+            style={{
+              paddingRight: 20,
+              justifyContent: "center",
+              flexDirection: "row"
+            }}
+          >
+            <Text>
+              <Icon name="ticket" size={20} color="#35D875" />
+            </Text>
+            <Text style={[styles.headerText]}> Revenue: {revenue}</Text>
           </View>
         </ScrollView>
       </View>

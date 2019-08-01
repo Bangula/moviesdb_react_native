@@ -38,6 +38,10 @@ const Home = ({ navigation }) => {
     getData(searchQuery);
   }, [pageNumber, searchQuery]);
 
+  useEffect(() => {
+    setPageNumber(1);
+  }, [searchQuery]);
+
   let mainBackgroundUrl;
   if (allMovies.length) {
     mainBackgroundUrl = getPoster(allMovies[0].poster_path);
@@ -47,27 +51,27 @@ const Home = ({ navigation }) => {
     setSearchQuery(text);
   };
 
-  async function getData(searchQuery) {
-    if (searchQuery) {
+  async function getData(text) {
+    if (text.length) {
       let url;
-      if (searchQuery.length < 2) {
+      if (text.length < 2) {
         url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&page=1`;
       } else {
-        url = `https://api.themoviedb.org/3/search/movie?api_key=844dba0bfd8f3a4f3799f6130ef9e335&language=en-US&query=${searchQuery}`;
+        url = `https://api.themoviedb.org/3/search/movie?api_key=844dba0bfd8f3a4f3799f6130ef9e335&language=en-US&query=${text}&page=${pageNumber}`;
       }
       axios
         .get(url)
         .then(res => {
           setAllMovies(res.data.results);
-          setSearchQuery("");
         })
         .catch(err => alert(err));
-    } else {
+    } else if (text.length <= 0) {
       axios
         .get(
           `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&page=${pageNumber}`
         )
         .then(res => {
+          console.log("second", res.data.results);
           let newList = allMovies.concat(res.data.results);
 
           setAllMovies(newList);

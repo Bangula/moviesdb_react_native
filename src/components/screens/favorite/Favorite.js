@@ -12,7 +12,7 @@ import { NavigationEvents } from "react-navigation";
 import AsyncStorage from "@react-native-community/async-storage";
 import FavoriteMovie from "./components/FavoriteMovie";
 
-const Favorites = props => {
+const Favorites = ({ navigation, ...props }) => {
   const [keys, setKeys] = React.useState([]);
   const [favorites, setFavorites] = useState([]);
 
@@ -86,7 +86,11 @@ const Favorites = props => {
                 <Button onPress={clearAll} title="remove all" />
               }
               renderItem={({ item }) => (
-                <FavoriteMovie movie={item} getAllKeys={() => getAllKeys()} />
+                <FavoriteMovie
+                  navigation={navigation}
+                  movie={item}
+                  getAllKeys={() => getAllKeys()}
+                />
               )}
             />
           </>
