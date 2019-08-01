@@ -140,14 +140,15 @@ const Home = ({ navigation }) => {
         <View
           style={allMovies.length ? styles.moviesList : styles.movieListHeight}
         >
-          {allMovies.length
-            ? allMovies.map(item => (
-                <View style={styles.imgWrap} key={item.id}>
-                  <HomeMovie navigation={navigation} movie={item} keys={keys} />
-                </View>
-              ))
-            : null}
-          <ActivityIndicator size="large" color="#35D875" />
+          {allMovies.length ? (
+            allMovies.map(item => (
+              <View style={styles.imgWrap} key={item.id}>
+                <HomeMovie navigation={navigation} movie={item} keys={keys} />
+              </View>
+            ))
+          ) : (
+            <ActivityIndicator size="large" color="#35D875" />
+          )}
         </View>
         {allMovies.length ? (
           <View
