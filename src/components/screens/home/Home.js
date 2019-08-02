@@ -28,22 +28,15 @@ const Home = ({ navigation }) => {
   const [allMovies, setAllMovies] = useState([]);
   const [keys, setKeys] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
-  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     getAllKeys();
+    getData();
   }, []);
 
   useEffect(() => {
-    if (pageNumber > 1) {
-      getData(searchQuery);
-    }
-    getData(searchQuery);
-  }, [pageNumber, searchQuery]);
-
-  useEffect(() => {
-    setPageNumber(1);
-  }, [searchQuery]);
+    if (pageNumber > 1) getDataByPage();
+  }, [pageNumber]);
 
   let mainBackgroundUrl;
   if (allMovies.length) {
@@ -51,40 +44,69 @@ const Home = ({ navigation }) => {
   }
 
   const setSearch = text => {
-    setSearchQuery(text);
-    if (text === "a") setPageNumber(1);
+    if (text.length) {
+      getSearchData(text);
+    } else {
+      getData();
+    }
   };
 
-  async function getData(text) {
-    console.log("pageNum:", pageNumber);
-    console.log("text:", text);
-    if (searchQuery.length) {
-      let url;
-      if (text.length < 2) {
-        url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&page=1`;
-      } else {
-        url = `https://api.themoviedb.org/3/search/movie?api_key=844dba0bfd8f3a4f3799f6130ef9e335&language=en-US&query=${text}&page=${pageNumber}`;
-      }
-      axios
-        .get(url)
-        .then(res => {
-          setAllMovies(res.data.results);
-        })
-        .catch(err => alert(err));
-    } else {
-      axios
-        .get(
-          `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&page=${pageNumber}`
-        )
-        .then(res => {
-          console.log("second", res.data.results);
-          let newList = allMovies.concat(res.data.results);
-
-          setAllMovies(newList);
-        })
-        .catch(err => alert(err));
-    }
+  function getData() {
+    url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&page=1`;
+    axios
+      .get(url)
+      .then(res => {
+        // let newList = allMovies.concat(res.data.results);
+        setAllMovies(res.data.results);
+      })
+      .catch(err => alert(err.response));
   }
+
+  function getDataByPage() {
+    url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&page=${pageNumber}`;
+    axios
+      .get(url)
+      .then(res => {
+        let newList = allMovies.concat(res.data.results);
+        setAllMovies(newList);
+      })
+      .catch(err => alert(err.response));
+  }
+
+  function getSearchData(text) {
+    url = `https://api.themoviedb.org/3/search/movie?api_key=844dba0bfd8f3a4f3799f6130ef9e335&language=en-US&query=${text}&page=1`;
+    axios
+      .get(url)
+      .then(res => {
+        setAllMovies(res.data.results);
+      })
+      .catch(err => alert(err.response));
+  }
+
+  // async function getData(text) {
+  //   if (searchQuery) {
+  //     let url;
+  //     url = `https://api.themoviedb.org/3/search/movie?api_key=844dba0bfd8f3a4f3799f6130ef9e335&language=en-US&query=${text}&page=${pageNumber}`;
+  //     axios
+  //       .get(url)
+  //       .then(res => {
+  //         setAllMovies(res.data.results);
+  //       })
+  //       .catch(err => alert(err.response));
+  //   } else {
+  //     axios
+  //       .get(
+  //         `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&page=${pageNumber}`
+  //       )
+  //       .then(res => {
+  //         console.log("second", res.data.results);
+  //         let newList = allMovies.concat(res.data.results);
+
+  //         setAllMovies(newList);
+  //       })
+  //       .catch(err => alert(err.response));
+  //   }
+  // }
 
   const getAllKeys = async () => {
     try {
@@ -111,10 +133,8 @@ const Home = ({ navigation }) => {
     },
     moviesList: {
       flex: 1,
-
       flexDirection: "row",
       justifyContent: "center",
-      flexWrap: "wrap",
       paddingTop: 10,
       backgroundColor: "black"
     },

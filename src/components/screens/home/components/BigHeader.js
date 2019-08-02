@@ -54,11 +54,7 @@ const BigHeader = ({ allMovies, mainBackgroundUrl, setSearch, navigation }) => {
   const handleSearch = debounce(text => {
     // if (text !== "") getData(text);
     // else getData();
-    if (!text) {
-      setSearch("a");
-    } else {
-      setSearch(text);
-    }
+    setSearch(text);
   }, 500);
 
   return (
