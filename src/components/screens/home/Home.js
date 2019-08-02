@@ -165,7 +165,10 @@ const Home = ({ navigation }) => {
         ) : null}
 
         <View
-          style={allMovies.length ? styles.moviesList : styles.movieListHeight}
+          style={[
+            allMovies.length ? styles.moviesList : styles.movieListHeight,
+            { flexWrap: "wrap" }
+          ]}
         >
           {allMovies.length ? (
             allMovies.map(item => (
